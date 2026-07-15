@@ -1,0 +1,874 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+/* ============================================================
+   Root font size — 16px base looks correct at 100% browser zoom on laptops
+   ============================================================ */
+html {
+  font-size: 16px;
+}
+
+@media (min-width: 1440px) {
+  html { font-size: 17px; }
+}
+
+@media (max-width: 900px) {
+  html { font-size: 14px; }
+}
+
+/* ============================================================
+   UDHP Design System — CSS Custom Properties
+   ============================================================ */
+:root {
+  /* Brand colors */
+  --udhp-primary:        #1E40AF;
+  --udhp-primary-hover:  #1D3DA0;
+  --udhp-primary-light:  #EFF6FF;
+  --udhp-teal:           #0D9488;
+  --udhp-teal-light:     #F0FDFA;
+  --udhp-danger:         #DC2626;
+  --udhp-danger-light:   #FEF2F2;
+  --udhp-warning:        #D97706;
+  --udhp-warning-light:  #FFFBEB;
+  --udhp-success:        #16A34A;
+  --udhp-success-light:  #F0FDF4;
+
+  /* Sidebar */
+  --sidebar-bg:          #0F172A;
+  --sidebar-border:      #1E293B;
+  --sidebar-text:        #94A3B8;
+  --sidebar-text-active: #F8FAFC;
+  --sidebar-active-bg:   #1E3A5F;
+  --sidebar-width:       260px;
+  --sidebar-collapsed:   72px;
+
+  /* Layout */
+  --navbar-height:       64px;
+  --content-bg:          #F1F5F9;
+  --card-bg:             #FFFFFF;
+  --border-color:        #E2E8F0;
+
+  /* Text */
+  --text-primary:        #1E293B;
+  --text-secondary:      #475569;
+  --text-muted:          #64748B;
+
+  /* Shadows */
+  --shadow-sm:   0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md:   0 4px 12px rgba(0,0,0,0.08);
+  --shadow-lg:   0 10px 30px rgba(0,0,0,0.10);
+  --shadow-card: 0 1px 4px rgba(0,0,0,0.05), 0 4px 16px rgba(0,0,0,0.04);
+}
+
+.shadow-card {
+  box-shadow: var(--shadow-card);
+}
+
+/* ============================================================
+   Base Reset
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background-color: var(--content-bg);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+}
+
+/* ============================================================
+   Scrollbar
+   ============================================================ */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+
+/* ============================================================
+   Auth Pages
+   ============================================================ */
+.auth-wrapper {
+  min-height: 100vh;
+  display: flex;
+}
+
+.auth-brand-panel {
+  flex: 0 0 42%;
+  background: linear-gradient(145deg, #0F172A 0%, #1E3A5F 50%, #0D9488 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-brand-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.auth-form-panel {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: #FFFFFF;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 440px;
+}
+
+/* Input styles for auth */
+.udhp-input {
+  width: 100%;
+  padding: 0.65rem 1rem;
+  border: 1.5px solid var(--border-color);
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-family: 'Inter', sans-serif;
+  color: var(--text-primary);
+  background: #FAFAFA;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  outline: none;
+}
+
+.udhp-input:focus {
+  border-color: var(--udhp-primary);
+  background: #FFFFFF;
+  box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+}
+
+.udhp-input::placeholder { color: #A8B6C8; }
+
+.udhp-input-icon-wrapper {
+  position: relative;
+}
+
+.udhp-input-icon-wrapper .udhp-input {
+  padding-left: 2.75rem;
+}
+
+.udhp-input-icon {
+  position: absolute;
+  left: 0.9rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+/* Primary button */
+.udhp-btn-primary {
+  width: 100%;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, var(--udhp-primary) 0%, #1D4ED8 100%);
+  color: #FFFFFF;
+  font-weight: 600;
+  font-size: 0.95rem;
+  font-family: 'Inter', sans-serif;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s;
+  box-shadow: 0 4px 14px rgba(30, 64, 175, 0.4);
+  letter-spacing: 0.01em;
+}
+
+.udhp-btn-primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(30, 64, 175, 0.45);
+}
+
+.udhp-btn-primary:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.udhp-btn-primary:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* Select */
+.udhp-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.85rem center;
+  padding-right: 2.5rem;
+}
+
+/* Error / alert boxes */
+.udhp-alert-error {
+  padding: 0.75rem 1rem;
+  background: var(--udhp-danger-light);
+  border: 1px solid #FCA5A5;
+  border-radius: 10px;
+  color: #B91C1C;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.udhp-alert-success {
+  padding: 0.75rem 1rem;
+  background: var(--udhp-success-light);
+  border: 1px solid #86EFAC;
+  border-radius: 10px;
+  color: #15803D;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* ============================================================
+   Dashboard Layout
+   ============================================================ */
+.dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+  background: var(--content-bg);
+}
+
+.dashboard-sidebar {
+  width: var(--sidebar-width);
+  min-height: 100vh;
+  background: var(--sidebar-bg);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 50;
+  transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  border-right: 1px solid var(--sidebar-border);
+}
+
+.dashboard-sidebar.collapsed {
+  width: var(--sidebar-collapsed);
+}
+
+.dashboard-main {
+  flex: 1;
+  margin-left: var(--sidebar-width);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  transition: margin-left 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dashboard-main.collapsed {
+  margin-left: var(--sidebar-collapsed);
+}
+
+.dashboard-navbar {
+  height: var(--navbar-height);
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  padding: 0 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  box-shadow: var(--shadow-sm);
+}
+
+.dashboard-content {
+  flex: 1;
+  padding: 1.75rem;
+  overflow-y: auto;
+}
+
+/* ============================================================
+   Sidebar Nav Items
+   ============================================================ */
+.sidebar-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.65rem 1rem;
+  margin: 0.15rem 0.75rem;
+  border-radius: 10px;
+  color: var(--sidebar-text);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background 0.15s, color 0.15s;
+  cursor: pointer;
+}
+
+.sidebar-nav-item:hover {
+  background: rgba(255,255,255,0.07);
+  color: var(--sidebar-text-active);
+}
+
+.sidebar-nav-item.active {
+  background: var(--sidebar-active-bg);
+  color: #60A5FA;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.sidebar-nav-item .nav-icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+}
+
+/* ============================================================
+   Cards
+   ============================================================ */
+.udhp-card {
+  background: var(--card-bg);
+  border-radius: 14px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.udhp-card-header {
+  padding: 1.1rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.udhp-card-body {
+  padding: 1.5rem;
+}
+
+/* Stat card with gradient accent bar */
+.stat-card {
+  background: var(--card-bg);
+  border-radius: 14px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-card);
+  padding: 1.25rem;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.stat-card-accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+}
+
+/* ============================================================
+   Tables
+   ============================================================ */
+.udhp-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.875rem;
+}
+
+.udhp-table thead th {
+  background: #F8FAFC;
+  color: var(--text-muted);
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.udhp-table tbody tr {
+  transition: background 0.12s;
+}
+
+.udhp-table tbody tr:hover {
+  background: #F8FAFC;
+}
+
+.udhp-table tbody td {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid #F1F5F9;
+  color: var(--text-primary);
+  vertical-align: middle;
+}
+
+/* ============================================================
+   Badges
+   ============================================================ */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.badge-success { background: var(--udhp-success-light); color: var(--udhp-success); }
+.badge-danger  { background: var(--udhp-danger-light);  color: var(--udhp-danger); }
+.badge-warning { background: var(--udhp-warning-light); color: var(--udhp-warning); }
+.badge-primary { background: var(--udhp-primary-light); color: var(--udhp-primary); }
+.badge-teal    { background: var(--udhp-teal-light);    color: var(--udhp-teal); }
+.badge-gray    { background: #F1F5F9; color: #64748B; }
+
+/* ============================================================
+   Animations
+   ============================================================ */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.animate-fade-in-up   { animation: fadeInUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.animate-fade-in      { animation: fadeIn 0.3s ease both; }
+.animate-slide-left   { animation: slideInLeft 0.4s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.animate-scale-in     { animation: scaleIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.animate-spin         { animation: spin 0.8s linear infinite; }
+
+.delay-100 { animation-delay: 100ms; }
+.delay-150 { animation-delay: 150ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+.delay-600 { animation-delay: 600ms; }
+
+/* ============================================================
+   Utility Overrides
+   ============================================================ */
+.glass-container {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  border-radius: 16px;
+  box-shadow: var(--shadow-lg);
+}
+
+/* Modal overlay */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(2px);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.modal-box {
+  background: var(--card-bg);
+  border-radius: 16px;
+  box-shadow: var(--shadow-lg);
+  width: 100%;
+  max-width: 520px;
+  animation: scaleIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Loader spinner */
+.udhp-spinner {
+  width: 22px;
+  height: 22px;
+  border: 2.5px solid rgba(255,255,255,0.3);
+  border-top-color: #FFFFFF;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: inline-block;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .auth-brand-panel { display: none; }
+  .auth-form-panel  { padding: 1.5rem 1rem; }
+  .dashboard-sidebar { transform: translateX(-100%); }
+  .dashboard-sidebar.mobile-open { transform: translateX(0); }
+  .dashboard-main { margin-left: 0 !important; }
+  .dashboard-content { padding: 1rem; }
+}
+
+/* ============================================================
+   Patient Portal Layout
+   ============================================================ */
+
+/* ---- Zoom wrapper: 2× scale so 50% browser zoom = 1× normal size ---- */
+.patient-zoom-wrapper {
+  zoom: 2;
+}
+
+/* ---- Sidebar (sticky on desktop, slides in on mobile) ---- */
+.patient-sidebar {
+  /* default desktop: position: sticky set inline in JSX */
+  transform: none;
+}
+
+/* ---- Nav links ---- */
+.patient-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.55rem 0.85rem;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #94A3B8;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+  margin-bottom: 0.2rem;
+}
+
+.patient-nav-link:hover {
+  background: rgba(255,255,255,0.07);
+  color: #F1F5F9;
+}
+
+.patient-nav-link.active {
+  background: #1E3A5F;
+  color: #60A5FA;
+}
+
+.patient-nav-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  background: rgba(255,255,255,0.06);
+  flex-shrink: 0;
+}
+
+/* ---- Mobile header: hidden on desktop ---- */
+.patient-mobile-header {
+  display: none;
+}
+
+/* ======================================================
+   Mobile (≤ 1024px CSS px → real screen width)
+   With zoom:2 active the sidebar can't be fixed. On
+   actual small screens we disable zoom and use the
+   classic fixed/slide-in sidebar instead.
+   ====================================================== */
+@media (max-width: 1024px) {
+
+  /* Disable zoom so the page is usable on tablets/phones */
+  .patient-zoom-wrapper {
+    zoom: 1;
+  }
+
+  /* Switch sidebar back to fixed+slide-in */
+  .patient-sidebar {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    height: 100vh !important;
+    width: 260px !important;
+    align-self: auto !important;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+
+  .patient-sidebar.open {
+    transform: translateX(0) !important;
+  }
+
+  .sidebar-close-btn {
+    display: flex !important;
+  }
+
+  .patient-main-area {
+    margin-left: 0 !important;
+  }
+
+  .patient-mobile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.85rem 1rem;
+    background: #fff;
+    border-bottom: 1px solid #E2E8F0;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  }
+}
+
+/* ---- Responsive grids (at the doubled scale) ---- */
+@media (max-width: 1600px) {
+  .patient-grid    { grid-template-columns: 1fr !important; }
+  .hero-grid       { grid-template-columns: 1fr !important; }
+  .bottom-grid     { grid-template-columns: 1fr !important; }
+}
+
+@media (max-width: 900px) {
+  .stat-cards-grid { grid-template-columns: repeat(2, 1fr) !important; }
+}
+
+.patient-nav-link:hover {
+  background: rgba(255,255,255,0.07);
+  color: #F1F5F9;
+}
+
+.patient-nav-link.active {
+  background: #1E3A5F;
+  color: #60A5FA;
+}
+
+.patient-nav-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.06);
+  flex-shrink: 0;
+}
+
+/* Mobile header: hidden on desktop */
+.patient-mobile-header {
+  display: none;
+}
+
+/* Mobile: sidebar slides in, main area takes full width */
+@media (max-width: 1024px) {
+  .patient-sidebar {
+    transform: translateX(-100%);
+  }
+
+  .patient-sidebar.open {
+    transform: translateX(0);
+  }
+
+  .sidebar-close-btn {
+    display: flex !important;
+    background: none;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    padding: 0.35rem;
+    color: #94A3B8;
+    cursor: pointer;
+  }
+
+  .patient-main-area {
+    margin-left: 0 !important;
+  }
+
+  .patient-mobile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.85rem 1rem;
+    background: #fff;
+    border-bottom: 1px solid #E2E8F0;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  }
+}
+
+/* Responsive patient grid */
+@media (max-width: 1100px) {
+  .patient-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .bottom-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .stat-cards-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* ============================================================
+   Nurse Portal Layout  (mirrors Patient Portal zoom pattern)
+   ============================================================ */
+
+/* zoom: 1 = normal laptop size at 100% browser zoom */
+.nurse-zoom-wrapper {
+  zoom: 1;
+}
+
+/* Sidebar — sticky on desktop */
+.nurse-sidebar {
+  transform: none;
+}
+
+/* Nav links */
+.nurse-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #CBD5E1;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+}
+
+.nurse-nav-link:hover {
+  background: #0F172A;
+  color: #fff;
+}
+
+.nurse-nav-link.active {
+  background: #1E293B;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(15,23,42,0.2);
+}
+
+.nurse-nav-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 1rem;
+  background: #1E293B;
+  color: #CBD5E1;
+  flex-shrink: 0;
+}
+
+/* Mobile header — hidden on desktop */
+.nurse-mobile-header {
+  display: none;
+}
+
+/* ── Mobile (≤ 1024px): disable zoom, fixed slide-in sidebar ── */
+@media (max-width: 1024px) {
+
+  .nurse-zoom-wrapper {
+    zoom: 1;
+  }
+
+  .nurse-sidebar {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    height: 100vh !important;
+    width: 288px !important;
+    border-radius: 0 1.5rem 1.5rem 0 !important;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+
+  .nurse-sidebar.open {
+    transform: translateX(0) !important;
+  }
+
+  .nurse-close-btn {
+    display: flex !important;
+  }
+
+  .nurse-main-area {
+    margin-left: 0 !important;
+  }
+
+  .nurse-mobile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    background: #fff;
+    border-bottom: 1px solid #E2E8F0;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  }
+}
+
+/* ============================================================
+   Admin Portal Styles
+   ============================================================ */
+
+/* Nav links */
+.admin-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #94A3B8;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+}
+.admin-nav-link:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #E2E8F0;
+}
+.admin-nav-link.active {
+  background: linear-gradient(135deg, #1d4ed8, #3b82f6);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(29, 78, 216, 0.35);
+}
+.admin-nav-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  flex-shrink: 0;
+}
+
+/* Mobile: sidebar becomes a fixed overlay drawer */
+@media (max-width: 768px) {
+  .admin-sidebar {
+    position: fixed !important;
+    left: 0;
+    top: 0;
+    width: 260px !important;
+    transform: translateX(-100%);
+    transition: transform 300ms ease !important;
+    z-index: 60;
+  }
+  .admin-sidebar.open {
+    transform: translateX(0);
+  }
+  .admin-mobile-toggle {
+    display: inline-flex !important;
+  }
+  .admin-collapse-btn {
+    display: none !important;
+  }
+}

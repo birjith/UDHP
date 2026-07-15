@@ -1,0 +1,647 @@
+:root {
+  color-scheme: light;
+}
+
+.dashboardPage {
+  display: flex;
+  min-height: 100vh;
+  background: #f5f8ff;
+}
+
+.sidebar {
+  width: 280px;
+  min-height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  padding: 28px 20px;
+  background: #0f172a;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 12px 40px rgba(15, 23, 42, 0.18);
+  z-index: 20;
+}
+
+.sidebarTop {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.brandCard {
+  border-radius: 24px;
+  padding: 20px;
+  background: linear-gradient(180deg, rgba(164, 217, 255, 0.16) 0%, rgba(30, 64, 175, 0.12) 76%);
+  border: 1px solid rgba(148, 163, 184, 0.16);
+}
+
+.brandLabel {
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #cbd5e1;
+  margin-bottom: 10px;
+}
+
+.brandName {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+}
+
+.brandId {
+  margin-top: 10px;
+  color: rgba(241, 245, 249, 0.85);
+  font-size: 13px;
+}
+
+.navList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border-radius: 16px;
+  padding: 14px 16px;
+  color: #cbd5e1;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: background 0.2s, color 0.2s;
+}
+
+.navItem.active {
+  background: #2563eb;
+  color: #eff6ff;
+}
+
+.navItem:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #f8fafc;
+}
+
+.navIcon {
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navBadge {
+  margin-left: auto;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #ef4444;
+}
+
+.logoutButton {
+  width: 100%;
+  border-radius: 18px;
+  padding: 14px 16px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: #ffffff;
+  background: #dc2626;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 16px 34px rgba(220, 38, 38, 0.22);
+  transition: transform 0.2s, background 0.2s;
+}
+
+.logoutButton:hover {
+  transform: translateY(-1px);
+  background: #b91c1c;
+}
+
+.main {
+  margin-left: 280px;
+  width: calc(100% - 280px);
+  display: flex;
+  flex-direction: column;
+  padding: 28px 30px 32px;
+}
+
+.headerRow {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  align-items: center;
+}
+
+.searchBar {
+  position: relative;
+  width: 100%;
+}
+
+.searchInput {
+  width: 100%;
+  border-radius: 18px;
+  border: 1px solid #dbeafe;
+  background: #f8fbff;
+  padding: 18px 20px 18px 52px;
+  font-size: 0.95rem;
+  color: #0f172a;
+  box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.08);
+}
+
+.searchIcon {
+  position: absolute;
+  top: 50%;
+  left: 18px;
+  transform: translateY(-50%);
+  color: #64748b;
+}
+
+.profileSummary {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+  min-width: 260px;
+}
+
+.specialtyCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: #1e3a8a;
+  color: #eff6ff;
+  min-width: 180px;
+}
+
+.specialtyLabel {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: rgba(226, 232, 240, 0.8);
+  margin-bottom: 4px;
+}
+
+.specialtyText {
+  font-size: 0.98rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.14);
+  object-fit: cover;
+}
+
+.welcomeRow {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  align-items: start;
+  margin-top: 32px;
+}
+
+.welcomeText {
+  max-width: 780px;
+}
+
+.welcomeLabel {
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.75rem;
+  margin-bottom: 12px;
+}
+
+.welcomeTitle {
+  font-size: clamp(2rem, 2.75vw, 3.5rem);
+  line-height: 1.02;
+  margin: 0;
+  color: #0f172a;
+}
+
+.welcomeSubtitle {
+  margin-top: 14px;
+  color: #475569;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+  margin-top: 28px;
+}
+
+.statCard {
+  border-radius: 24px;
+  background: #f8fbff;
+  border: 1px solid #e2e8f0;
+  padding: 24px;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.06);
+}
+
+.statLabel {
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #64748b;
+  letter-spacing: 0.18em;
+}
+
+.statValue {
+  margin-top: 18px;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.statMeta {
+  margin-top: 16px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: #475569;
+  font-size: 0.95rem;
+}
+
+.statMeta .highlight {
+  color: #2563eb;
+  font-weight: 700;
+}
+
+.mainGrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.appointmentCard,
+.vitalsCard,
+.actionCard {
+  border-radius: 32px;
+  background: #f8fbff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.06);
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 28px;
+}
+
+.sectionTitle {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.sectionMeta {
+  color: #64748b;
+  font-size: 0.92rem;
+}
+
+.tabGroup {
+  display: inline-flex;
+  background: #e2e8f0;
+  border-radius: 999px;
+  padding: 6px;
+}
+
+.tabButton {
+  border: none;
+  background: transparent;
+  color: #475569;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.tabButton.active {
+  background: #ffffff;
+  color: #0f172a;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+}
+
+.queueList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0 28px 28px;
+}
+
+.queueCard {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 22px 20px;
+  border-radius: 24px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+}
+
+.queueCard.urgent {
+  border-color: #f87171;
+  box-shadow: 0 14px 40px rgba(248, 113, 113, 0.15);
+}
+
+.urgent {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.confirmed {
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.waiting {
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+.patientAvatar {
+  width: 58px;
+  height: 58px;
+  border-radius: 18px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.patientAvatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.queueInfo {
+  flex: 1;
+}
+
+.patientName {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.patientNote {
+  margin: 8px 0 0;
+  color: #64748b;
+  font-size: 0.93rem;
+}
+
+.queueStatus {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  text-align: right;
+}
+
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 98px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.statusBadge.confirmed {
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.statusBadge.waiting {
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+.statusBadge.urgent {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.vitalsCard {
+  background: #0f172a;
+  color: #e2e8f0;
+  display: flex;
+  flex-direction: column;
+}
+
+.vitalsContent {
+  padding: 24px 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.vitalsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.vitalsTitle {
+  color: #f8fafc;
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.vitalsUnit {
+  color: #94a3b8;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+}
+
+.vitalsBlock {
+  display: grid;
+  gap: 18px;
+}
+
+.vitalsCardItem {
+  display: grid;
+  gap: 12px;
+  padding: 20px;
+  border-radius: 24px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.vitalsPatient {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.vitalsPatientName {
+  color: #ffffff;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.vitalsPatientTag {
+  font-size: 0.78rem;
+  color: #94a3b8;
+}
+
+.vitalsMetric {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0;
+}
+
+.vitalsStatus {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
+.vitalsGraph {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  align-items: end;
+  margin-top: 8px;
+}
+
+.vitalsBar {
+  width: 100%;
+  border-radius: 999px;
+  background: #1e293b;
+}
+
+.vitalsBar.filled {
+  background: #38bdf8;
+}
+
+.monitorButton {
+  margin-top: auto;
+  padding: 16px 22px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255,255,255,0.08);
+  color: #ffffff;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.monitorButton:hover {
+  transform: translateY(-1px);
+  background: rgba(255,255,255,0.14);
+}
+
+.bottomGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  margin-top: 24px;
+}
+
+.actionCard {
+  padding: 28px 24px;
+}
+
+.actionIcon {
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  background: rgba(59, 130, 246, 0.12);
+  color: #2563eb;
+}
+
+.actionTitle {
+  margin: 18px 0 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.actionText {
+  margin: 0;
+  color: #64748b;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+@media (max-width: 1200px) {
+  .statsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .mainGrid {
+    grid-template-columns: 1fr;
+  }
+  .bottomGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  .main {
+    margin-left: 0;
+    width: 100%;
+    padding: 24px 20px 28px;
+  }
+  .sidebar {
+    position: relative;
+    width: 100%;
+    min-height: auto;
+    box-shadow: none;
+  }
+  .dashboardPage {
+    flex-direction: column;
+  }
+  .headerRow,
+  .welcomeRow {
+    grid-template-columns: 1fr;
+  }
+  .profileSummary {
+    justify-content: space-between;
+    min-width: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .sidebar {
+    display: none;
+  }
+  .main {
+    margin-left: 0;
+    padding: 18px 16px 22px;
+  }
+  .searchInput {
+    padding-left: 50px;
+  }
+}
