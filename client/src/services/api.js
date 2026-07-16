@@ -1,7 +1,42 @@
 import axios from 'axios';
 
+const DEFAULT_API_BASE_URL = 'https://udhp.onrender.com/api';
+
+export const normalizeApiBaseUrl = (value) => {
+    if (!value) return DEFAULT_API_BASE_URL;
+
+    const trimmedValue = value.trim();
+    if (!trimmedValue) return DEFAULT_API_BASE_URL;
+
+    try {
+        const url = new URL(trimmedValue.replace(/\/+$/, ''));
+        const pathname = url.pathname.replace(/\/+$/, '');
+
+        if (pathname === '' || pathname === '/') {
+            url.pathname = '/api';
+        } else if (pathname.endsWith('/api/auth')) {
+            url.pathname = pathname.replace(/\/auth$/, '');
+        } else if (pathname.endsWith('/auth')) {
+            const basePath = pathname.replace(/\/auth$/, '');
+            url.pathname = basePath ? `${basePath}/api` : '/api';
+        } else if (pathname.endsWith('/api')) {
+            url.pathname = pathname;
+        } else {
+            url.pathname = `${pathname}/api`;
+        }
+
+        return url.toString().replace(/\/$/, '');
+    } catch (error) {
+        return trimmedValue.endsWith('/api')
+            ? trimmedValue.replace(/\/+$/, '')
+            : `${trimmedValue.replace(/\/+$/, '')}/api`;
+    }
+};
+
+const apiBaseUrl = normalizeApiBaseUrl(import.meta.env.VITE_API_URL);
+
 const api = axios.create({
-    baseURL: 'http://localhost:5001/api',
+    baseURL: apiBaseUrl,
 });
 
 api.interceptors.request.use(

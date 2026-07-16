@@ -9,6 +9,8 @@ const app = express();
 // Middleware
 const allowedOrigins = [
   process.env.FRONTEND_URL || 'http://localhost:3000',
+  'https://udhp.vercel.app',
+  'https://www.udhp.vercel.app',
   'http://localhost:5178',
   'http://127.0.0.1:5178',
   'http://localhost:5173',
@@ -17,6 +19,8 @@ const allowedOrigins = [
   'http://127.0.0.1:5174',
 ].filter(Boolean);
 
+const isVercelOrigin = (origin) => /^https:\/\/[a-z0-9.-]+\.vercel\.app$/i.test(origin);
+
 app.use(cors({
   origin: (origin, callback) => {
     if (!origin) {
@@ -24,7 +28,7 @@ app.use(cors({
     }
 
     const isLocalhost = origin.startsWith('http://localhost:') || origin.startsWith('http://127.0.0.1:');
-    if (allowedOrigins.includes(origin) || isLocalhost) {
+    if (allowedOrigins.includes(origin) || isLocalhost || isVercelOrigin(origin)) {
       return callback(null, true);
     }
 
@@ -34,6 +38,21 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Root and health routes
+app.get('/', (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: 'Backend is running',
+  });
+});
+
+app.get('/health', (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: 'Server is running',
+  });
+});
 
 // Routes
 app.use('/api/auth', require('./routes/auth'));
@@ -81,4 +100,8 @@ const startServer = async () => {
   });
 };
 
-startServer();
+if (require.main === module) {
+  startServer();
+}
+
+module.exports = app;
